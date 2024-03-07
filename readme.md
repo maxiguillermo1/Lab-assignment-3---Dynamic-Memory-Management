@@ -11,6 +11,26 @@
 
 This guide provides an overview of how to implement a dynamic memory allocator in C, focusing on the key concepts of "Overhead Size" and "Pointer Size". These are fundamental to managing memory efficiently in a custom allocator using a free list and first-fit block selection strategy.
 
+## Basic Idea
+
+Your dynamic memory allocator works like a smart system in a library. Instead of books, you're dealing with memory spaces (blocks). When someone (a program) needs space (like a book), they ask your system. Your system then checks if it has a space big enough and hands it over. If the requested space isn't needed anymore, it's returned back to be used by someone else later.
+
+## Understanding `main.c`
+
+This file acts as the interface for interacting with your memory allocator. It offers a menu to perform different actions, like borrowing space for integers, characters, or even arrays. After using the space, you can also return it. Each menu option is a different scenario of using this library system, showing how flexible and efficient it is.
+
+- **menuOptionOne to Five**: These functions are specific scenarios, like asking for space to store one or more integers, a character, arrays, etc. They show how to allocate and deallocate memory, and print addresses to understand where each item is stored.
+- **main function**: This is where your program starts. It presents a menu to choose different scenarios, initializes the memory allocator with a predefined size, and then executes the chosen scenario.
+
+## Understanding `memoryhelp.c`
+
+This file contains the logic of your memory allocator, handling the behind-the-scenes work.
+
+- **Struct Block**: Think of this as the information tag on each book in the library, telling you how big it is and what the next book is.
+- **my_initialize_heap**: This function sets up your library before anyone starts borrowing space. It's like setting up the shelves and deciding how much room you have.
+- **my_alloc**: This is when someone asks for space. This function checks if there's enough room, finds the right spot, and might even split a large space into a smaller one to fit the request perfectly. It ensures that no space is wasted.
+- **my_free**: This is when borrowed space is returned back. It makes sure the returned space is marked as available for someone else to use.
+
 ## Key Concepts
 
 ### Overhead Size
